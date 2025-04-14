@@ -86,7 +86,7 @@
 </head>
 <body>
     <div id="content">
-        <h1>Đây là một trang web t tạo ra để test độ hiểu nhau của t vs m</h1>
+        <h1>Đây là một trang web t tạo ra để test độ hiểu nhau của t vs chú em</h1>
         <p>Hãy nhìn các lá bài dưới đây và chọn lá bài được cho là thích nhất</p>
         
         <div class="cards">
@@ -107,22 +107,22 @@
         </div>
     </div>
     
-    <div id="successMessage" class="success-message">t vs m hiểu nhau đấy</div>
+    <div id="successMessage" class="success-message">t vs m hiểu nhau đấy chú em</div>
     
     <script>
         function cardClicked(card, number) {
-            alert("Bạn đã chọn: " + card.textContent);
+            alert("m chọn: " + card.textContent);
             if (number > 3) {
                 checkAnswer(card);
             }
         }
         
         function checkAnswer(card) {
-            let answer = prompt("Bạn có chắc chắn muốn chọn bài này không? (yes/no)");
+            let answer = prompt("m có chắc chắn muốn chọn bài này không? (yes/no)");
             if (answer && answer.toLowerCase() === "yes") {
                 ketqua(card);
             } else {
-                alert("Mời bạn chọn lại");
+                alert("chọn lại đi chú em");
             }
         }
         
