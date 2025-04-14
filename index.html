@@ -114,7 +114,7 @@
             alert("m chọn: " + card.textContent);
                 checkAnswer(card);
             }
-        }
+        
         
         function checkAnswer(card) {
             let answer = prompt("m có chắc chắn muốn chọn bài này không? (yes/no)");
@@ -141,17 +141,13 @@
         }
         
         function createManyFireworks() {
-          
             const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff', '#ffa500'];
             
-          
             const interval = setInterval(() => {
-              
                 for (let i = 0; i < 10; i++) {
                     const firework = document.createElement('div');
                     firework.className = 'firework';
                     
-             
                     const posX = Math.random() * window.innerWidth;
                     const posY = Math.random() * window.innerHeight;
                     
@@ -161,7 +157,6 @@
                     
                     document.body.appendChild(firework);
                     
-             
                     setTimeout(() => {
                         firework.remove();
                     }, 1000);
@@ -171,6 +166,33 @@
             setTimeout(() => {
                 clearInterval(interval);
             }, 10000);
+
+            // Add text heading above the video
+            const heading = document.createElement('h2');
+            heading.textContent = "Xin chúc mừng!";
+            heading.style.color = "white";
+            heading.style.marginBottom = "20px";
+            heading.style.textShadow = "0 0 10px rgb(0, 251, 255)";
+            heading.style.textAlign = "center";
+            heading.style.width = "100%";
+
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.textAlign = "center";
+            successMessage.style.width = "100%";
+            successMessage.insertBefore(heading, successMessage.firstChild);
+            
+            const video = document.createElement('video');
+            video.src = 'att.CawLfV8Ib7V-YTu6lUan9CCBCbBjiaxwEQce9X1sZgY.mp4';
+            video.controls = true;
+            video.autoplay = true;
+            video.style.maxWidth = '80%';
+            video.style.marginBottom = '40px';
+            video.style.borderRadius = '100px';
+            video.style.boxShadow = '0 0 20px rgba(0, 251, 255, 0.7)';
+            video.style.display = "block";
+            video.style.margin = "0 auto";
+
+            successMessage.insertBefore(video, successMessage.childNodes[1]);
         }
     </script>
 </body>
