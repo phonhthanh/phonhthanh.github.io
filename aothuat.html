@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Selection Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            text-align: center;
+            transition: background-color 1s ease;
+        }
+        
+        h1 {
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+        
+        .card {
+            font-size: 80px; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: explode 1s ease-out forwards;
+            z-index: 100;
+        }
+        
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(30);
+                opacity: 0;
+            }
+        }
+        
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            text-shadow: 0 0 10px rgb(0, 251, 255);
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>Đây là một trang web t tạo ra để test độ hiểu nhau của t vs m</h1>
+        <p>Hãy nhìn các lá bài dưới đây và chọn lá bài được cho là thích nhất</p>
+        
+        <div class="cards">
+            <div class="card" onclick="cardClicked(this, 1)">🂡</div>
+            <div class="card" onclick="cardClicked(this, 2)">🂢</div>
+            <div class="card" onclick="cardClicked(this, 3)">🂣</div>
+            <div class="card" onclick="cardClicked(this, 4)">🂤</div>
+            <div class="card" onclick="cardClicked(this, 5)">🂥</div>
+            <div class="card" onclick="cardClicked(this, 6)">🂦</div>
+            <div class="card" onclick="cardClicked(this, 7)">🂧</div>
+            <div class="card" onclick="cardClicked(this, 8)">🂨</div>
+            <div class="card" onclick="cardClicked(this, 9)">🂩</div>
+            <div class="card" onclick="cardClicked(this, 10)">🂪</div>
+            <div class="card" onclick="cardClicked(this, 11)">🂫</div>
+            <div class="card" onclick="cardClicked(this, 12)">🂬</div>
+            <div class="card" onclick="cardClicked(this, 13)">🂭</div>
+            <div class="card" onclick="cardClicked(this, 14)">🂮</div>  
+        </div>
+    </div>
+    
+    <div id="successMessage" class="success-message">t vs m hiểu nhau đấy</div>
+    
+    <script>
+        function cardClicked(card, number) {
+            alert("Bạn đã chọn: " + card.textContent);
+            if (number > 3) {
+                checkAnswer(card);
+            }
+        }
+        
+        function checkAnswer(card) {
+            let answer = prompt("Bạn có chắc chắn muốn chọn bài này không? (yes/no)");
+            if (answer && answer.toLowerCase() === "yes") {
+                ketqua(card);
+            } else {
+                alert("Mời bạn chọn lại");
+            }
+        }
+        
+        function ketqua(card) {
+         
+            document.getElementById("content").style.display = "none";
+            
+           
+            document.body.style.backgroundColor = "black";
+            
+           
+            const successMessage = document.getElementById("successMessage");
+            successMessage.style.display = "block";
+            
+            
+            createManyFireworks();
+        }
+        
+        function createManyFireworks() {
+          
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff', '#ffa500'];
+            
+          
+            const interval = setInterval(() => {
+              
+                for (let i = 0; i < 10; i++) {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    
+             
+                    const posX = Math.random() * window.innerWidth;
+                    const posY = Math.random() * window.innerHeight;
+                    
+                    firework.style.left = posX + 'px';
+                    firework.style.top = posY + 'px';
+                    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    document.body.appendChild(firework);
+                    
+             
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 1000);
+                }
+            }, 200);
+         
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
