@@ -3,197 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Selection Game</title>
+    <title>For Hoang Vy ❤️</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+            background-color: #fff0f5;
             text-align: center;
-            transition: background-color 1s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #ffe6e6, #ffd1dc);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            max-width: 600px;
+            width: 90%;
         }
         
         h1 {
-            color: #333;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            color: #ff4d4d;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 28px;
         }
         
         p {
+            color: #ff6b6b;
             font-size: 18px;
-            color: #555;
-            margin-bottom: 30px;
+            margin: 20px 0;
         }
         
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px auto;
-            max-width: 800px;
-        }
-        
-        .card {
-            font-size: 80px; 
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: explode 1s ease-out forwards;
-            z-index: 100;
-        }
-        
-        @keyframes explode {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(30);
-                opacity: 0;
-            }
-        }
-        
-        .success-message {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
+        .love-button {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
             color: white;
-            text-shadow: 0 0 10px rgb(0, 251, 255);
-            z-index: 200;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        
+        .love-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 7px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        .love-message {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: #fff;
+            color: #ff4d4d;
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .love-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b6b;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0;
         }
     </style>
 </head>
 <body>
-    <div id="content">
-        <h1>Đây là một trang web t tạo ra để test độ hiểu nhau của t vs chú em</h1>
-        <p>Hãy nhìn các lá bài dưới đây và chọn lá bài được cho là thích nhất</p>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <h1>💖 Hoàng Vy, Em Bé Của Anh 💖</h1>
+        <p>Anh là tổng tài lạnh lùng nhưng trái tim anh chỉ dành cho em</p>
+        <button class="love-button" id="loveButton">Gửi Yêu Thương 💝</button>
         
-        <div class="cards">
-            <div class="card" onclick="cardClicked(this, 1)">🂡</div>
-            <div class="card" onclick="cardClicked(this, 2)">🂢</div>
-            <div class="card" onclick="cardClicked(this, 3)">🂣</div>
-            <div class="card" onclick="cardClicked(this, 4)">🂤</div>
-            <div class="card" onclick="cardClicked(this, 5)">🂥</div>
-            <div class="card" onclick="cardClicked(this, 6)">🂦</div>
-            <div class="card" onclick="cardClicked(this, 7)">🂧</div>
-            <div class="card" onclick="cardClicked(this, 8)">🂨</div>
-            <div class="card" onclick="cardClicked(this, 9)">🂩</div>
-            <div class="card" onclick="cardClicked(this, 10)">🂪</div>
-            <div class="card" onclick="cardClicked(this, 11)">🂫</div>
-            <div class="card" onclick="cardClicked(this, 12)">🂬</div>
-            <div class="card" onclick="cardClicked(this, 13)">🂭</div>
-            <div class="card" onclick="cardClicked(this, 14)">🂮</div>  
-        </div>
+        <div class="love-message" id="loveMessage"></div>
     </div>
     
-    <div id="successMessage" class="success-message">t vs m hiểu nhau đấy chú em</div>
-    
     <script>
-        function cardClicked(card, number) {
-            alert("m chọn: " + card.textContent);
-                checkAnswer(card);
-            }
+        const loveButton = document.getElementById('loveButton');
+        const loveMessage = document.getElementById('loveMessage');
+        const heartsContainer = document.getElementById('hearts');
         
+        const messages = [
+            "Em là điều tuyệt vời nhất anh từng có 💕",
+            "Yêu em nhiều lắm, em có biết không? 💘",
+            "Mỗi ngày bên em là một ngày hạnh phúc 💖",
+            "Trái tim anh chỉ đập vì em 💓",
+            "Cám ơn em đã đến bên đời anh 💝",
+            "Anh yêu em hơn cả những vì sao trên trời 🌟",
+            "Mãi mãi là của nhau em nhé 💑"
+        ];
         
-        function checkAnswer(card) {
-            let answer = prompt("m có chắc chắn muốn chọn bài này không? (yes/no)");
-            if (answer && answer.toLowerCase() === "yes") {
-                ketqua(card);
-            } else {
-                alert("chọn lại đi chú em");
-            }
-        }
-        
-        function ketqua(card) {
-         
-            document.getElementById("content").style.display = "none";
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
             
-           
-            document.body.style.backgroundColor = "black";
+            heartsContainer.appendChild(heart);
             
-           
-            const successMessage = document.getElementById("successMessage");
-            successMessage.style.display = "block";
-            
-            
-            createManyFireworks();
-        }
-        
-        function createManyFireworks() {
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff', '#ffa500'];
-            
-            const interval = setInterval(() => {
-                for (let i = 0; i < 10; i++) {
-                    const firework = document.createElement('div');
-                    firework.className = 'firework';
-                    
-                    const posX = Math.random() * window.innerWidth;
-                    const posY = Math.random() * window.innerHeight;
-                    
-                    firework.style.left = posX + 'px';
-                    firework.style.top = posY + 'px';
-                    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    
-                    document.body.appendChild(firework);
-                    
-                    setTimeout(() => {
-                        firework.remove();
-                    }, 1000);
-                }
-            }, 200);
-         
             setTimeout(() => {
-                clearInterval(interval);
-            }, 10000);
-
-            // Add text heading above the video
-            const heading = document.createElement('h2');
-            heading.textContent = "Xin chúc mừng!";
-            heading.style.color = "white";
-            heading.style.marginBottom = "20px";
-            heading.style.textShadow = "0 0 10px rgb(0, 251, 255)";
-            heading.style.textAlign = "center";
-            heading.style.width = "100%";
-
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.textAlign = "center";
-            successMessage.style.width = "100%";
-            successMessage.insertBefore(heading, successMessage.firstChild);
-            
-            const video = document.createElement('video');
-            video.src = 'att.CawLfV8Ib7V-YTu6lUan9CCBCbBjiaxwEQce9X1sZgY.mp4';
-            video.controls = true;
-            video.autoplay = true;
-            video.style.maxWidth = '80%';
-            video.style.marginBottom = '40px';
-            video.style.borderRadius = '100px';
-            video.style.boxShadow = '0 0 20px rgba(0, 251, 255, 0.7)';
-            video.style.display = "block";
-            video.style.margin = "0 auto";
-
-            successMessage.insertBefore(video, successMessage.childNodes[1]);
+                heart.style.opacity = '1';
+                heart.style.transform = `translateY(-${Math.random() * 100 + 100}vh)`;
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 100);
         }
+        
+        loveButton.addEventListener('click', function() {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            loveMessage.textContent = randomMessage;
+            loveMessage.classList.add('show');
+            
+            // Create floating hearts
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            
+            // Hide message after some time
+            setTimeout(() => {
+                loveMessage.classList.remove('show');
+            }, 5000);
+        });
     </script>
 </body>
 </html>
