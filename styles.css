@@ -1,0 +1,154 @@
+:root{
+  --bg:#0b0f17;
+  --card:#111827cc;
+  --glass:#ffffff1a;
+  --ring:#60a5fa;
+  --accent:#f472b6;
+  --accent-2:#a78bfa;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --good:#34d399;
+  --danger:#f87171;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--text); background:radial-gradient(1200px 800px at 10% 10%, #0f172a 0%, #0b0f17 50%, #070a0f 100%);
+  overflow:hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+html{ -webkit-text-size-adjust: 100%; }
+
+#bgParticles{position:fixed; inset:0; z-index:0}
+
+.overlay{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px); z-index:10; opacity:0; pointer-events:none; transition:opacity .4s ease}
+.overlay.visible{opacity:1; pointer-events:auto}
+
+.card{background:var(--card); border:1px solid var(--glass); padding:28px; border-radius:16px; box-shadow:0 20px 60px #00000066; width:min(92vw,560px)}
+.lock-card{ text-align:center }
+.title{margin:0 0 8px 0; font-weight:800; letter-spacing:.4px}
+.subtitle{margin:0 0 18px 0; color:var(--muted)}
+.hint{margin:12px 0 0; color:var(--muted); font-size:.9rem}
+
+.input-row{display:flex; gap:10px; align-items:center; justify-content:center}
+.input-row input{flex:1; min-width:0; background:#0b1220; color:var(--text); border:1px solid var(--glass); padding:12px 14px; border-radius:12px; outline:none; transition:border .2s, box-shadow .2s}
+.input-row input{ font-size:16px; }
+.input-row input:focus{border-color:var(--ring); box-shadow:0 0 0 3px #60a5fa33}
+
+.btn{appearance:none; border:none; background:var(--glass); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:transform .05s ease, background .2s; font-size:16px; touch-action:manipulation; user-select:none; -webkit-user-select:none}
+.btn:hover{background:#ffffff26}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:linear-gradient(135deg, var(--ring), var(--accent)); color:#fff}
+.btn.ghost{background:transparent; border:1px solid #ffffff22}
+.link{ background:none; border:none; color:#93c5fd; cursor:pointer; text-decoration:underline; padding:0; font:inherit }
+.btn.buy{background:linear-gradient(135deg, #1f2937, #111827); border:1px solid #ffffff1f}
+.btn.buy.enabled{background:linear-gradient(135deg, #16a34a, #059669); border-color:#10b981}
+
+/* Game */
+.hidden{display:none}
+#game{position:relative; z-index:1; height:100%; display:grid; grid-template-rows:auto 1fr auto; gap:16px; padding:18px 18px 26px}
+
+#hud{display:flex; gap:12px; align-items:center; justify-content:center}
+.stat{display:flex; align-items:center; gap:8px; background:var(--glass); padding:10px 14px; border-radius:999px; border:1px solid #ffffff1a}
+.stat .label{color:var(--muted); font-weight:600}
+.stat .value{font-weight:800}
+
+#playArea{position:relative; display:flex; align-items:center; justify-content:center}
+#clickButton{ position:relative; width:240px; height:240px; border-radius:50%; border:1px solid #ffffff1a; background:radial-gradient(140px 140px at 35% 35%, #111827, #0b1220); box-shadow:inset 0 10px 36px #0000006b, 0 24px 70px #00000066; cursor:pointer; transition:transform .07s ease; touch-action:manipulation; user-select:none; -webkit-user-select:none}
+#clickButton:active{ transform:scale(.98)}
+
+/* Crystal orb */
+.orb-shape{ position:absolute; inset:0; margin:auto; width:180px; height:180px; border-radius:50%; background:
+  radial-gradient(90px 90px at 35% 30%, #93c5fd, transparent 70%),
+  radial-gradient(120px 120px at 65% 60%, #f0abfc66, transparent 70%),
+  conic-gradient(from 0deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
+  filter:saturate(1.2);
+  box-shadow:inset 0 20px 60px #00000066, 0 20px 80px #60a5fa33;
+}
+.orb-shape .shine{ position:absolute; left:12%; top:10%; width:46%; height:46%; border-radius:50%; background:radial-gradient(circle at 30% 30%, #fff, #ffffff88 40%, transparent 60%); filter:blur(1px); mix-blend-mode:screen; animation:shine-move 3.2s ease-in-out infinite }
+@keyframes shine-move{ 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(10px, -6px) } }
+
+.click-plus{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#fff; font-weight:800; text-shadow:0 2px 6px #0008; opacity:0; pointer-events:none}
+
+#upgrades{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; padding:0 8px}
+.upgrade-card{ background:var(--card); border:1px solid var(--glass); border-radius:16px; padding:16px; display:grid; gap:8px }
+.upgrade-card .u-title{ font-weight:700 }
+.upgrade-card .u-desc{ color:var(--muted) }
+.upgrade-card .u-meta{ display:flex; align-items:center; justify-content:space-between }
+
+/* Finale */
+#shatterOverlay{ pointer-events:none; z-index:20 }
+
+#loveScene{ z-index:30; display:flex; align-items:center; justify-content:center; text-align:center; background:radial-gradient(800px 600px at 50% 60%, #0b0f17cc, #05070bcc) }
+#loveScene .love-wrap{ position:relative; transform:translateY(10px); opacity:0; transition:all .8s ease }
+#loveScene.visible .love-wrap{ transform:translateY(0); opacity:1 }
+
+.love-wrap{ padding:0 12px }
+
+.halo{ position:absolute; width:420px; height:420px; border-radius:50%; background:radial-gradient(closest-side, #f472b633, transparent 70%); filter:blur(20px); z-index:-1 }
+.big-heart{ width:220px; height:220px; position:relative; margin:0 auto 18px; transform:rotate(-45deg); background:radial-gradient(140px 140px at 30% 30%, #fb7185, #f472b6); border-radius:24px 0 0 24px; box-shadow:0 20px 80px #f472b666 }
+.big-heart:before,.big-heart:after{ content:""; position:absolute; width:220px; height:220px; background:radial-gradient(140px 140px at 30% 30%, #fb7185, #f472b6); border-radius:50% }
+.big-heart:before{ top:-110px; left:0 }
+.big-heart:after{ top:0; left:110px }
+
+.love-text{ font-family:"Great Vibes", cursive; font-size:56px; letter-spacing:1px; margin:0 0 12px; text-shadow:0 6px 28px #000a; background:linear-gradient(90deg, #fff, #fef3c7, #fbcfe8, #e9d5ff); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 2px 8px #f472b655) }
+.love-text .name{ letter-spacing:2px; text-transform:lowercase; background:linear-gradient(90deg, #fde68a, #f472b6, #a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent }
+
+.controls{ margin:8px 0 12px }
+.btn.small{ padding:8px 12px; border-radius:10px; font-size:.9rem }
+
+.lyrics{ max-height:32vh; overflow:auto; scrollbar-width:thin; background:#0000003a; border:1px solid #ffffff1a; border-radius:12px; padding:12px }
+.lyrics p{ margin:8px 0; opacity:.9 }
+
+.video-wrap{ position:relative; width:min(92vw, 720px); aspect-ratio:16/9; margin:14px auto; border-radius:16px; overflow:hidden; box-shadow:0 30px 120px #000000cc, 0 0 0 1px #ffffff22 inset }
+.love-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000 }
+.video-overlay{ position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, #0b0f17aa, #0b0f1788); backdrop-filter:blur(2px); cursor:pointer; transition:opacity .3s ease }
+.video-overlay.hidden{ opacity:0; pointer-events:none }
+.play-icon{ width:66px; height:66px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #ffffff, #ffffffd9 40%, #ffffffc7 50%, #ffffff55 100%); position:relative; box-shadow:0 12px 40px #ffffff66 }
+.play-icon::after{ content:""; position:absolute; left:26px; top:21px; width:0; height:0; border-left:22px solid #0b0f17; border-top:14px solid transparent; border-bottom:14px solid transparent }
+
+/* Camera zoom on finale */
+.camera-zoom{ animation:camera-zoom 2.2s cubic-bezier(.2,.8,.2,1) forwards }
+@keyframes camera-zoom{ 0%{ transform:scale(1) } 20%{ transform:scale(1.04) } 100%{ transform:scale(1) } }
+
+/* Glitter */
+.glitter{ position:fixed; pointer-events:none; z-index:32; width:6px; height:6px; background:radial-gradient(circle, #fff, transparent 60%); filter:blur(.5px); opacity:.9; animation:glitter 1.6s ease-out forwards }
+@keyframes glitter{ 0%{ transform:translate(0,0) scale(1) rotate(0deg) } 100%{ transform:translate(var(--gtx), var(--gty)) scale(0.2) rotate(240deg); opacity:0 } }
+
+/* Flash effect */
+.flash{ position:fixed; inset:0; background:#fff; opacity:0; z-index:40; pointer-events:none; animation:flash-in .85s ease-out forwards }
+@keyframes flash-in{ 0%{ opacity:0 } 15%{ opacity:1 } 100%{ opacity:0 } }
+
+/* Screen shatter effect */
+.shard{ position:fixed; inset:0; width:100vw; height:100vh; background:#0b0f17; box-shadow:inset 0 0 100px #000000f0; z-index:25; transform-origin:var(--ox) var(--oy); clip-path:polygon(var(--poly)); animation:shard-seq 2.2s cubic-bezier(.2,.8,.2,1) forwards }
+@keyframes shard-seq{
+  0%{ transform:translate(calc(var(--tx)*-0.15), calc(var(--ty)*-0.15)) scale(0.96) rotate(calc(var(--rot)*-0.2)); opacity:0.9 }
+  18%{ transform:translate(calc(var(--tx)*-0.25), calc(var(--ty)*-0.25)) scale(0.9) rotate(calc(var(--rot)*-0.3)); opacity:1 }
+  100%{ transform:translate(var(--tx), var(--ty)) rotate(var(--rot)); opacity:0 }
+}
+
+/* Shockwave */
+.shockwave{ position:fixed; inset:0; pointer-events:none; z-index:35 }
+.shockwave::before{ content:""; position:absolute; left:50%; top:50%; width:40px; height:40px; border-radius:50%; border:2px solid #ffffff80; transform:translate(-50%,-50%) scale(0.1); filter:blur(1px); animation:shockwave 2s ease-out forwards }
+@keyframes shockwave{ 0%{ opacity:0.9; transform:translate(-50%,-50%) scale(0.1) } 70%{ opacity:0.5 } 100%{ opacity:0; transform:translate(-50%,-50%) scale(18) } }
+
+/* Mobile tweaks */
+@media (max-width: 480px){
+  .card{ width:92vw; padding:20px }
+  #game{ padding:12px }
+  #hud{ flex-wrap:wrap }
+  #clickButton{ width:200px; height:200px }
+  .orb-shape{ width:150px; height:150px }
+  .big-heart, .big-heart:before, .big-heart:after{ width:180px; height:180px }
+  .big-heart:before{ top:-90px }
+  .big-heart:after{ left:90px }
+  .love-text{ font-size:44px }
+  .video-wrap{ width:94vw }
+}
+
+/* Floating particles */
+.particle{ position:fixed; border-radius:50%; background:radial-gradient(circle at 30% 30%, #60a5fa, #60a5fa22 60%, transparent 70%); filter:blur(0.4px); opacity:.7; pointer-events:none; animation:float 12s ease-in-out infinite }
+@keyframes float{ 0%{ transform:translateY(0)} 50%{ transform:translateY(-30px)} 100%{ transform:translateY(0)} }
+
+
